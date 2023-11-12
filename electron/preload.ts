@@ -1,7 +1,6 @@
-import {contextBridge} from "electron";
+import {ipcRenderer, contextBridge} from "electron";
+import {Mod} from "ts4mm/types";
 
 contextBridge.exposeInMainWorld("$api", {
-    hello: (): string => {
-        return "Hello, world!";
-    }
+    discoverMods: async (): Promise<Mod[]> => ipcRenderer.invoke("discoverMods"),
 });
