@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import path from "node:path";
 import {Mod, ModInfo} from "ts4mm/types";
+import {globSync} from "glob";
 
 function loadMod(dir: string): Mod {
     const infoFile = path.resolve(dir, "info.json");
@@ -10,7 +11,8 @@ function loadMod(dir: string): Mod {
         id: path.basename(dir),
         dir,
         info: fs.existsSync(infoFile) ? <ModInfo>fs.readJSONSync(infoFile) : undefined,
-        thumbnail: fs.existsSync(thumbnailFile) ? thumbnailFile : undefined
+        thumbnail: fs.existsSync(thumbnailFile) ? thumbnailFile : undefined,
+        screenshots: globSync(path.join(dir, "screenshots/**/*"), {windowsPathsNoEscape: true}),
     };
 }
 
