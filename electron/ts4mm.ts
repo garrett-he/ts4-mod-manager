@@ -4,11 +4,13 @@ import {Mod, ModInfo} from "ts4mm/types";
 
 function loadMod(dir: string): Mod {
     const infoFile = path.resolve(dir, "info.json");
+    const thumbnailFile = path.resolve(dir, "thumbnail.png");
 
     return <Mod>{
         id: path.basename(dir),
         dir,
-        info: fs.existsSync(infoFile) ? <ModInfo>fs.readJSONSync(infoFile) : undefined
+        info: fs.existsSync(infoFile) ? <ModInfo>fs.readJSONSync(infoFile) : undefined,
+        thumbnail: fs.existsSync(thumbnailFile) ? thumbnailFile : undefined
     };
 }
 

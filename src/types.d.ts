@@ -7,6 +7,7 @@ declare module "ts4mm/types" {
         id: string;
         dir: string;
         info?: ModInfo | undefined;
+        thumbnail?: string | undefined;
     }
 
     interface ModInfo {
