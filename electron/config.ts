@@ -6,7 +6,8 @@ import {AppConfig} from "ts4mm/types";
 
 const config = new ElectronStore<AppConfig>({
     defaults: <AppConfig>{
-        library: path.resolve(app.getPath("documents"), "TS4ModManager")
+        library: path.resolve(app.getPath("documents"), "TS4ModManager"),
+        target: path.resolve(app.getPath("documents"), "Electronic Arts/The Sims 4")
     }
 });
 

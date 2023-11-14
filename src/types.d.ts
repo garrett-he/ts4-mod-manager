@@ -1,6 +1,7 @@
 declare module "ts4mm/types" {
     interface AppConfig {
         library: string;
+        target: string;
     }
 
     interface Mod {
