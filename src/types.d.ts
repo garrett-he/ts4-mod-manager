@@ -22,4 +22,9 @@ declare module "ts4mm/types" {
         url?: string | undefined;
         description: string;
     }
+
+    interface ModInstallLog {
+        src: string;
+        target: string;
+    }
 }
