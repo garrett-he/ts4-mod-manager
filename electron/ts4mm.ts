@@ -79,3 +79,18 @@ export function installMod(mod: Mod, target: string) {
 
     mod.installed = true;
 }
+
+export function uninstallMod(mod: Mod) {
+    if (!mod.installed) return;
+
+    JSON.parse(fs.readFileSync(path.resolve(mod.dir, MOD_INSTALL_LOG_FILENAME), "utf-8").toString()).forEach(log => {
+        fs.rmSync(log.target);
+
+        const dir = path.dirname(log.target);
+        if (fs.readdirSync(dir).length === 0) {
+            fs.rmdirSync(dir);
+        }
+    });
+
+    fs.rmSync(path.resolve(mod.dir, MOD_INSTALL_LOG_FILENAME));
+}
