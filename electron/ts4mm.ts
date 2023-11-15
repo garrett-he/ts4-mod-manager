@@ -109,3 +109,7 @@ export async function importMod(root: string, filename: string): Promise<Mod> {
 
     return loadMod(target);
 }
+
+export function deleteMod(mod: Mod) {
+    fs.rmdirSync(mod.dir, {recursive: true});
+}
