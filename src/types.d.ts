@@ -27,4 +27,20 @@ declare module "ts4mm/types" {
         src: string;
         target: string;
     }
+
+    interface ModCategorySummary {
+        category: string;
+        count: number;
+    }
+
+    interface ModTagSummary {
+        tag: string;
+        count: number;
+    }
+
+    interface ModFindOptions {
+        keyword?: string | undefined;
+        categories: string[];
+        tags: string[];
+    }
 }
