@@ -1,5 +1,7 @@
-import fs from "fs-extra";
+import crypto from "node:crypto";
 import path from "node:path";
+import fs from "fs-extra";
+import extract from "extract-zip";
 import {Mod, ModInfo, ModInstallLog} from "ts4mm/types";
 import {globSync} from "glob";
 
@@ -93,4 +95,17 @@ export function uninstallMod(mod: Mod) {
     });
 
     fs.rmSync(path.resolve(mod.dir, MOD_INSTALL_LOG_FILENAME));
+}
+
+export async function importMod(root: string, filename: string): Promise<Mod> {
+    const id = crypto.createHash("md5").update(Buffer.from(fs.readFileSync(filename))).digest("hex");
+    const target = path.resolve(root, id);
+
+    if (fs.existsSync(target)) {
+        throw new Error(`Mod "${filename}" already exists in library.`);
+    }
+
+    await extract(filename, {dir: target});
+
+    return loadMod(target);
 }
